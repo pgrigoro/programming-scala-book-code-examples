@@ -1,37 +1,28 @@
-# Programming Scala, 2nd and 3rd (Forthcoming) Editions
+# Programming Scala, Third Edition
 
 ## README for the Code Examples
 
 *Dean Wampler*<br/>
-*August 11, 2014*<br/>
-*May 27, 2019* - Updated for Scala 2.12 and 2.13<br/>
-*June 18, 2019* - New support for Maven builds, courtesy of [oldbig](https://github.com/oldbig)<br/>
-*October 12, 2019* - Updated for Scala 2.13.1, sbt 1.3.2, and other updated dependencies. Also now compiles with JDK 11<br/>
-*October 13, 2019* - Renamed the repo from `prog-scala-2nd-ed-code-examples` to `programming-scala-book-code-examples`.
+*August 11, 2014* - Second edition<br/> 
+*October 13, 2019* - Started third edition changes<br/>
 
 [![Join the chat at https://gitter.im/deanwampler/prog-scala-2nd-ed-code-examples](https://badges.gitter.im/deanwampler/prog-scala-2nd-ed-code-examples.svg)](https://gitter.im/deanwampler/prog-scala-2nd-ed-code-examples?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This repo contains all the code examples found in [Programming Scala, Second Edition](http://shop.oreilly.com/product/0636920033073.do), with the exception of some trivial code snippets in the text. There are also some examples in this distribution that aren't actually in the book. The planned third edition will use this repo, too.
+This repo contains all the code examples found in [Programming Scala, Third Edition](http://shop.oreilly.com/product/todo), with the exception of some trivial code snippets in the text. There are also some examples in this distribution that aren't actually in the book. 
 
-When the second edition was published, the examples used Scala 2.11. The code has since been updated to also compile with Scala 2.12 and 2.13. The examples are mostly unchanged, except where necessary to compile with these newer versions, with the stricter compiler flags now used, and because of changes in newer versions of libraries, especially ScalaTest.
-
-If you want the original second-edition code (with a few bug fixes), download the tagged [2.1.0](https://github.com/deanwampler/programming-scala-book-code-examples/releases/tag/2.1.0) build or check out the `release-2.1.0` branch. The latest `2.X.Y` release and `release-2.X.Y` branch include all the updates for 2.12 and 2.13. The third edition releases for Scala 3 and Scala 2.14 will be tagged with `release-3.X.Y`.
+The third edition supports Scala 3.0 and Scala 2.14, with Scala 3.0 the default. The third edition releases for Scala 3 and Scala 2.14 are tagged with `release-3.X.Y`. If you want the original third-edition code (with a few bug fixes) from the book, download the latest [3.0.Y](https://github.com/deanwampler/programming-scala-book-code-examples/releases/) build or check out the `release-3.0.Y` branch. If you want the original second-edition code, which is also in this repo, download the tagged [2.1.0](https://github.com/deanwampler/programming-scala-book-code-examples/releases/tag/2.1.0) build or check out the `release-2.1.0` branch. In general, the latest `2.X.Y` release and `release-2.X.Y` branch include all the updates for Scala 2.12 and 2.13 to the original, second-edition code examples.
 
 ## How the Code Is Used in the Book
 
 In the book's text, when an example corresponds to a file in this distribution, the listing begins with a path in a comment with the following format:
 
 ```
-// src/main/scala/progscala2/chapter/../filename
+// src/main/scala/../filename
 ```
 
 And similarly for Java files (yes, there are Java files!). Following the usual conventions, tests are in `src/test/...`.
 
-> **NOTE:** When I upgraded support for 2.12 and 2.13, a few of the `*.scala` files were converted to `*.sc` script files (see below), because they are no long compilable as is with the new, stricter compile flags I'm using.
-
-Use these comments to find the corresponding source file. This archive also contains *ScalaTest*, *ScalaCheck*, and *Specs2* unit tests to validate some of the code. Most of these tests are not reproduced in the text of the book, except when discussing testing itself.
-
-> **WARNING:** Despite attempts by [oldbig](https://github.com/oldbig) and others assisting me, the Maven build currently does _not_ run the *Specs2* example, `src/test/scala/progscala2/tools/ComplexSpecs2.scala`, when running `mvn test`. It is properly executed by `sbt test`.
+Use these comments to find the corresponding source file. This archive also contains unit tests to validate some of the code. Most of these tests are not reproduced in the text of the book, except when discussing testing itself.
 
 ## Naming Conventions
 
@@ -56,52 +47,34 @@ Most editors and IDEs now have some sort of Scala support:
 
 * [IntelliJ](https://www.jetbrains.com/idea/): Either the Community or Ultimate additions will work. Install the Scala plugin, which has built-in support for SBT.
 * [Visual Studio Code](https://code.visualstudio.com/): Use the new [Scala Metals](https://scalameta.org/metals/) plugin instead of older plugins.
-* [Eclipse Scala IDE](http://scala-ide.org): Old, no longer recommended.
 
-For other IDEs and text editors, try [Scala Metals](https://scalameta.org/metals/) first (I've used it with [Sublime Text](https://www.sublimetext.com/), for example) or [ENSIME](http://ensime.github.io/). You may also need additional, third-party tools for syntax highlighting, etc.
+For other IDEs and text editors, try [Scala Metals](https://scalameta.org/metals/). I've used it with [Sublime Text](https://www.sublimetext.com/), for example. You may also need additional, third-party tools for syntax highlighting, etc.
 
-After installing the required plugins, load this project in your IDE, which should detect and use the SBT project automatically. For eclipse, run the `sbt eclipse` task to generate project files, then import them.
+After installing the required plugins, load this project in your IDE, which should detect and use the SBT project automatically.
 
 ## Building the Code Examples
 
-After installing SBT, open a command/terminal window and run the `sbt test` command. By default, it now uses Scala 2.12.8. To build and test for Scala 2.11, 2.12, and 2.13, run `sbt +test`.
-
-You'll see lots of output as it downloads all the dependencies, compiles the code and runs the tests. You should see `[success]` messages at the end.
-
-SBT is discussed in more detail in the book and the [SBT website](https://www.scala-sbt.org/), but a few useful commands are worth mentioning here.
-
-If you start `sbt` without any arguments, it puts you into an interactive mode where you can type commands. Use control-D to exit this mode. Once at the SBT prompt (a `>`), try the following commands, where each `#` starts a comment; don't type those!
-
-	help       # help on tasks and settings
-	clean      # delete all build outputs
-	compile    # compile the source, but not test code
-	test       # compile source and test code, if necessary and run the tests.
-	+test      # compile and test for all versions of Scala supported.
-	~test      # continuously compile and test when source changes are saved.
-	tasks      # show the most common tasks (commands).
-	tasks -V   # REALLY show ALL tasks
-
-Note the `+test` example. It looks at a property named `crossScalaVersions` in the build file, `build.sbt` to know which versions of Scala to use. The `+` can be used for any task, although for some it will make little sense. Similarly, the `~` prefix causes the task to be run continuously each time source code changes are saved. This promotes continuous TDD (test-driven development) and is one of my favorite features!
+After installing SBT, open a command/terminal window and run the `sbt test` command. By default, it uses Scala 3.0. To build and test for Scala 2.14 _and_ 3.0, run `sbt +test`.
 
 Outside of SBT, you could, in principle, run the script files manually at the console/terminal prompt.
 
     scala src/main/scala/.../foo.sc
 
-However, many of the scripts require other project code that has been compiled (which is in `target/scala-2.11/classes`) and occasionally third-party libraries that are part of the project dependencies.
+However, many of the scripts require other project code that has been compiled (which is in `target/scala-.../classes`) and occasionally third-party libraries that are part of the project dependencies.
 
 For example, if build artifacts are required on the class path, use the following command from the *root* directory of the distribution:
 
-    scala -classpath target/scala-2.11/classes src/main/scala/.../foo.sc
+    scala -classpath target/scala-.../classes src/main/scala/.../foo.sc
 
 Usually, the best way to run the scripts is to start `sbt` and run `console` to start the Scala REPL with all the dependencies added to the classpath. Then, use the REPL `:load src/main/scala/.../foo.sc` to load and run the script.
 
 ## Feedback
 
-I welcome feedback on the Book and these examples. Please post comments, corrections, etc. to one of the following places:
+I welcome feedback on the book and these examples. Please post comments, corrections, etc. to one of the following places:
 
 * This GitHub repo's [Gitter channel](https://gitter.im/deanwampler/prog-scala-2nd-ed-code-examples) or [Issues](https://github.com/deanwampler/prog-scala-2nd-ed-code-examples/issues)
 * The book's Twitter account, [@ProgScala](https://twitter.com/ProgScala)
-* The O'Reilly book site, [Programming Scala, Second Edition](http://shop.oreilly.com/product/0636920033073.do)
-* The [O'Reilly errata page](http://oreilly.com/catalog/errata.csp?isbn=0636920033073)
+* The O'Reilly book site, [Programming Scala, Third Edition](http://shop.oreilly.com/product/todo)
+* The [O'Reilly errata page](http://oreilly.com/catalog/errata.csp?isbn=todo)
 
 There is also a dedicated site for the book where occasional updates, clarifications, corrections, and lame excuses will be posted: [programming-scala.org](http://programming-scala.org).
